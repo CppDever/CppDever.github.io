@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>mengshuai的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Boost学习ignore_unusedboost::ignore_unused  对未使用但保留的变量进行一次使用，使编译器不发出警告 可对变量（ignore_unused(var)）和类型（ignore_unused()）进行忽略 P106-108 optionalBoost::optional 提供一种无效值的解决方案，可以认为是一个类似指针行为的大小为1的容器。这样当所谓的“指针”为空就是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mengshuai的博客">
+<meta property="og:url" content="https://cppdever.github.io/2017/09/02/Boost学习/index.html">
+<meta property="og:site_name" content="mengshuai的博客">
+<meta property="og:description" content="Boost学习ignore_unusedboost::ignore_unused  对未使用但保留的变量进行一次使用，使编译器不发出警告 可对变量（ignore_unused(var)）和类型（ignore_unused()）进行忽略 P106-108 optionalBoost::optional 提供一种无效值的解决方案，可以认为是一个类似指针行为的大小为1的容器。这样当所谓的“指针”为空就是">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-08-15T11:27:54.358Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mengshuai的博客">
+<meta name="twitter:description" content="Boost学习ignore_unusedboost::ignore_unused  对未使用但保留的变量进行一次使用，使编译器不发出警告 可对变量（ignore_unused(var)）和类型（ignore_unused()）进行忽略 P106-108 optionalBoost::optional 提供一种无效值的解决方案，可以认为是一个类似指针行为的大小为1的容器。这样当所谓的“指针”为空就是">
+  
+    <link rel="alternate" href="/atom.xml" title="mengshuai的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">mengshuai的博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">CPP Developer</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://cppdever.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Boost学习" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/02/Boost学习/" class="article-date">
+  <time datetime="2017-09-02T02:05:00.064Z" itemprop="datePublished">2017-09-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Boost学习"><a href="#Boost学习" class="headerlink" title="Boost学习"></a>Boost学习</h1><h2 id="ignore-unused"><a href="#ignore-unused" class="headerlink" title="ignore_unused"></a>ignore_unused</h2><p>boost::ignore_unused  对未使用但保留的变量进行一次使用，使编译器不发出警告</p>
+<p>可对变量（ignore_unused(var)）和类型（ignore_unused<type>()）进行忽略</type></p>
+<p><strong>P106-108</strong></p>
+<h2 id="optional"><a href="#optional" class="headerlink" title="optional"></a>optional</h2><p>Boost::optional 提供一种无效值的解决方案，可以认为是一个类似指针行为的大小为1的容器。这样当所谓的“指针”为空就是无效值。相反它有值则是有效值。相当于在解空间之外增加了一个值作为无效值。</p>
+<h2 id="assign-–continue-只看了最简单的"><a href="#assign-–continue-只看了最简单的" class="headerlink" title="assign  –continue[只看了最简单的]"></a>assign  –continue[只看了最简单的]</h2><p>Boost::assign 用来向容器中写入大量数据。  重载operator+=和operator,</p>
+<h2 id="swap"><a href="#swap" class="headerlink" title="swap"></a>swap</h2><p>对std::swap做了增强和泛化</p>
+<p>c++98 std::swap 只进行了简单交换，对于大对象，是效率最低最简单的一种。</p>
+<p>c++11 std::swap 支持了move语义，但其交换对象要支持move构造</p>
+<p>如果是大对象的swap建议使用指针来引用。或者自己实现特化swap，或者实现一个作用域更小（优先级高）的swap</p>
+<p>ADL：参数依赖查找</p>
+<p>P122-126</p>
+<h2 id="singleton"><a href="#singleton" class="headerlink" title="singleton"></a>singleton</h2><p>boost::serialization::singleton 小工具 不十分完善的实现</p>
+<h2 id="tribool"><a href="#tribool" class="headerlink" title="tribool"></a>tribool</h2><p>boost::tribool<br>boost::logic</p>
+<p>三态bool <true,false,indeterminate> 真、假、未知</true,false,indeterminate></p>
+<h2 id="uuid"><a href="#uuid" class="headerlink" title="uuid"></a>uuid</h2><p>boost::uuids  别名GUID  生成16位标识符</p>
+<p>使用生成器对象来生成随机的uuid</p>
+<p>Nil生成器：生成无效uuid<br>字符串生成器：从字符串传声，必须符合字符串的规则</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>《Boost程序库完全开发指南（第三版）》</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://cppdever.github.io/2017/09/02/Boost学习/" data-id="cj72oy68r0004i4usaradzwto" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/09/02/设计模式/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          设计模式
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/09/02/More Effective C++ 学习笔记/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">More Effective C++ 学习笔记</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/09/02/设计模式/">设计模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/02/Boost学习/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/02/More Effective C++ 学习笔记/">More Effective C++ 学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/20/hello/">欢迎访问</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/20/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 mengshuai<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

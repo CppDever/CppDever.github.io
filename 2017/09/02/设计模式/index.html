@@ -3,18 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>mengshuai的博客</title>
+  <title>设计模式 | mengshuai的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="技术分享">
-<meta property="og:type" content="website">
-<meta property="og:title" content="mengshuai的博客">
-<meta property="og:url" content="https://cppdever.github.io/index.html">
+  <meta name="description" content="六大设计原则单一职责原则简称SRP，其含义为：应该有且仅有一个原则引起类的变更。最难划分的也是职责，没有量化标准。 里氏替换原则简称LSP，其含义为：  父类出现的地方可以完全使用子类替换，也就是说子类需要完全实现父类的方法 可以有自己的特性 覆盖父类方法时需要输入参数不被缩小、输出结果不可以被放大  依赖倒置原则简称DIP，倒置就说一说依赖的不是实现（类），而是抽象（类）。其含义为：  高层模块">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计模式">
+<meta property="og:url" content="https://cppdever.github.io/2017/09/02/设计模式/index.html">
 <meta property="og:site_name" content="mengshuai的博客">
-<meta property="og:description" content="技术分享">
+<meta property="og:description" content="六大设计原则单一职责原则简称SRP，其含义为：应该有且仅有一个原则引起类的变更。最难划分的也是职责，没有量化标准。 里氏替换原则简称LSP，其含义为：  父类出现的地方可以完全使用子类替换，也就是说子类需要完全实现父类的方法 可以有自己的特性 覆盖父类方法时需要输入参数不被缩小、输出结果不可以被放大  依赖倒置原则简称DIP，倒置就说一说依赖的不是实现（类），而是抽象（类）。其含义为：  高层模块">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-09-02T02:29:34.505Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="mengshuai的博客">
-<meta name="twitter:description" content="技术分享">
+<meta name="twitter:title" content="设计模式">
+<meta name="twitter:description" content="六大设计原则单一职责原则简称SRP，其含义为：应该有且仅有一个原则引起类的变更。最难划分的也是职责，没有量化标准。 里氏替换原则简称LSP，其含义为：  父类出现的地方可以完全使用子类替换，也就是说子类需要完全实现父类的方法 可以有自己的特性 覆盖父类方法时需要输入参数不被缩小、输出结果不可以被放大  依赖倒置原则简称DIP，倒置就说一说依赖的不是实现（类），而是抽象（类）。其含义为：  高层模块">
   
     <link rel="alternate" href="/atom.xml" title="mengshuai的博客" type="application/atom+xml">
   
@@ -67,9 +68,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-设计模式" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-设计模式" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/09/02/设计模式/" class="article-date">
   <time datetime="2017-09-02T02:29:16.000Z" itemprop="datePublished">2017-09-02</time>
@@ -82,8 +81,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/02/设计模式/">设计模式</a>
+    <h1 class="article-title" itemprop="name">
+      设计模式
     </h1>
   
 
@@ -147,185 +146,19 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-Boost学习" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/09/02/Boost学习/" class="article-date">
-  <time datetime="2017-09-02T02:05:00.064Z" itemprop="datePublished">2017-09-02</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Boost学习"><a href="#Boost学习" class="headerlink" title="Boost学习"></a>Boost学习</h1><h2 id="ignore-unused"><a href="#ignore-unused" class="headerlink" title="ignore_unused"></a>ignore_unused</h2><p>boost::ignore_unused  对未使用但保留的变量进行一次使用，使编译器不发出警告</p>
-<p>可对变量（ignore_unused(var)）和类型（ignore_unused<type>()）进行忽略</type></p>
-<p><strong>P106-108</strong></p>
-<h2 id="optional"><a href="#optional" class="headerlink" title="optional"></a>optional</h2><p>Boost::optional 提供一种无效值的解决方案，可以认为是一个类似指针行为的大小为1的容器。这样当所谓的“指针”为空就是无效值。相反它有值则是有效值。相当于在解空间之外增加了一个值作为无效值。</p>
-<h2 id="assign-–continue-只看了最简单的"><a href="#assign-–continue-只看了最简单的" class="headerlink" title="assign  –continue[只看了最简单的]"></a>assign  –continue[只看了最简单的]</h2><p>Boost::assign 用来向容器中写入大量数据。  重载operator+=和operator,</p>
-<h2 id="swap"><a href="#swap" class="headerlink" title="swap"></a>swap</h2><p>对std::swap做了增强和泛化</p>
-<p>c++98 std::swap 只进行了简单交换，对于大对象，是效率最低最简单的一种。</p>
-<p>c++11 std::swap 支持了move语义，但其交换对象要支持move构造</p>
-<p>如果是大对象的swap建议使用指针来引用。或者自己实现特化swap，或者实现一个作用域更小（优先级高）的swap</p>
-<p>ADL：参数依赖查找</p>
-<p>P122-126</p>
-<h2 id="singleton"><a href="#singleton" class="headerlink" title="singleton"></a>singleton</h2><p>boost::serialization::singleton 小工具 不十分完善的实现</p>
-<h2 id="tribool"><a href="#tribool" class="headerlink" title="tribool"></a>tribool</h2><p>boost::tribool<br>boost::logic</p>
-<p>三态bool <true,false,indeterminate> 真、假、未知</true,false,indeterminate></p>
-<h2 id="uuid"><a href="#uuid" class="headerlink" title="uuid"></a>uuid</h2><p>boost::uuids  别名GUID  生成16位标识符</p>
-<p>使用生成器对象来生成随机的uuid</p>
-<p>Nil生成器：生成无效uuid<br>字符串生成器：从字符串传声，必须符合字符串的规则</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>《Boost程序库完全开发指南（第三版）》</p>
+  
+    <a href="/2017/09/02/Boost学习/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cppdever.github.io/2017/09/02/Boost学习/" data-id="cj72oy68r0004i4usaradzwto" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
   
 </article>
-
-
-  
-    <article id="post-More Effective C++ 学习笔记" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/09/02/More Effective C++ 学习笔记/" class="article-date">
-  <time datetime="2017-09-02T01:43:16.000Z" itemprop="datePublished">2017-09-02</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/02/More Effective C++ 学习笔记/">More Effective C++ 学习笔记</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="操作符"><a href="#操作符" class="headerlink" title="操作符"></a>操作符</h2><h3 id="条款7-不要重载-amp-amp-、-和-操作符"><a href="#条款7-不要重载-amp-amp-、-和-操作符" class="headerlink" title="条款7 不要重载&amp;&amp;、||和,操作符"></a>条款7 不要重载&amp;&amp;、||和,操作符</h3><p>因为逻辑表达式有 骤死性，不一定执行完所有逻辑判断。而重载后的函数是不具有这种功能。在使用时，就会导致习惯性错误。</p>
-<p>‘，’操作符具有顺序取值语义，但重载后，就会变成参数，就不具有顺序取值语义了，会导致和其操作符语义不符从而习惯性错误。</p>
-<h3 id="条款8-了解各种不同意义的new和delete"><a href="#条款8-了解各种不同意义的new和delete" class="headerlink" title="条款8 了解各种不同意义的new和delete"></a>条款8 了解各种不同意义的new和delete</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">new Type()    //这个new属于语言内建的 功能为：1.内存分配 2.调用构造</div><div class="line">operator new  //属于自定义的 可以改变内建new的内存分配方式</div></pre></td></tr></table></figure>
-<p>Placement new 在内存上构造对象（调用构造函数） 可用于共享内存等特殊内存之上的构造。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">delete object    //这个delete属于语言内建的 功能为：1.调用析构 2.释放内存</div><div class="line">operator delete  //属于自定义的 可以改变内建delete的内存释放方式</div></pre></td></tr></table></figure>
-<p>数组同理 operator new []  operator delete []</p>
-<h2 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h2><p>所谓的exception-safe很难。C++没有统一的异常使用指南。</p>
-<h3 id="条款9-使用destructors避免泄漏资源"><a href="#条款9-使用destructors避免泄漏资源" class="headerlink" title="条款9 使用destructors避免泄漏资源"></a>条款9 使用destructors避免泄漏资源</h3><p>析构应该为虚函数，使多态能够正确识别调用者，正确调用自己的析构函数。</p>
-<p>RAII保证发生异常时所有<strong>已经被构造完成</strong>的局部变量会被正确释放，所以不要使用指针进行资源操作。也不要出现抛出异常的函数之前有资源泄漏的问题。</p>
-<p>已经构造完成是指，在构造函数中抛异常C++是不管的、</p>
-<h3 id="条款10-在constructors阻止资源泄漏"><a href="#条款10-在constructors阻止资源泄漏" class="headerlink" title="条款10 在constructors阻止资源泄漏"></a>条款10 在constructors阻止资源泄漏</h3><p>在构造函数中会出现异常的地方进行try catch，防止其扩散，从而泄漏资源。</p>
-<h3 id="条款11-禁止异常流出destructors之外"><a href="#条款11-禁止异常流出destructors之外" class="headerlink" title="条款11 禁止异常流出destructors之外"></a>条款11 禁止异常流出destructors之外</h3><p>两种情况会调析构，一种是对象被正常销毁，一种是被出现异常导致RAII销毁，也就是异常传播的栈展开给销毁。</p>
-<p>出现异常导致调用析构，使该异常扩散的出析构作用于。则terminate就会被调用，程序立即终止。所以应该在析构中捕获异常。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cppdever.github.io/2017/09/02/More Effective C++ 学习笔记/" data-id="cj72oy6850002i4us8z74q0rp" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hello" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/07/20/hello/" class="article-date">
-  <time datetime="2017-07-20T08:08:52.000Z" itemprop="datePublished">2017-07-20</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/20/hello/">欢迎访问</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>欢迎来到我的博客，这里分享技术文章。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cppdever.github.io/2017/07/20/hello/" data-id="cj72oy6830001i4uszaswtlod" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/07/20/hello-world/" class="article-date">
-  <time datetime="2017-07-20T07:58:28.662Z" itemprop="datePublished">2017-07-20</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/20/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cppdever.github.io/2017/07/20/hello-world/" data-id="cj72oy6870003i4usqi565cor" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 </section>
         
