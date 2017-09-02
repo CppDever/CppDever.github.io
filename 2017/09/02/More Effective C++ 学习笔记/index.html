@@ -3,18 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>mengshuai的博客</title>
+  <title>More Effective C++ 学习笔记 | mengshuai的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="技术分享">
-<meta property="og:type" content="website">
-<meta property="og:title" content="mengshuai的博客">
-<meta property="og:url" content="https://cppdever.github.io/index.html">
+  <meta name="description" content="操作符条款7 不要重载&amp;amp;&amp;amp;、||和,操作符因为逻辑表达式有 骤死性，不一定执行完所有逻辑判断。而重载后的函数是不具有这种功能。在使用时，就会导致习惯性错误。 ‘，’操作符具有顺序取值语义，但重载后，就会变成参数，就不具有顺序取值语义了，会导致和其操作符语义不符从而习惯性错误。 条款8 了解各种不同意义的new和delete12new Type()    //这个new属于语言内建的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="More Effective C++ 学习笔记">
+<meta property="og:url" content="https://cppdever.github.io/2017/09/02/More Effective C++ 学习笔记/index.html">
 <meta property="og:site_name" content="mengshuai的博客">
-<meta property="og:description" content="技术分享">
+<meta property="og:description" content="操作符条款7 不要重载&amp;amp;&amp;amp;、||和,操作符因为逻辑表达式有 骤死性，不一定执行完所有逻辑判断。而重载后的函数是不具有这种功能。在使用时，就会导致习惯性错误。 ‘，’操作符具有顺序取值语义，但重载后，就会变成参数，就不具有顺序取值语义了，会导致和其操作符语义不符从而习惯性错误。 条款8 了解各种不同意义的new和delete12new Type()    //这个new属于语言内建的">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-09-02T01:44:47.464Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="mengshuai的博客">
-<meta name="twitter:description" content="技术分享">
+<meta name="twitter:title" content="More Effective C++ 学习笔记">
+<meta name="twitter:description" content="操作符条款7 不要重载&amp;amp;&amp;amp;、||和,操作符因为逻辑表达式有 骤死性，不一定执行完所有逻辑判断。而重载后的函数是不具有这种功能。在使用时，就会导致习惯性错误。 ‘，’操作符具有顺序取值语义，但重载后，就会变成参数，就不具有顺序取值语义了，会导致和其操作符语义不符从而习惯性错误。 条款8 了解各种不同意义的new和delete12new Type()    //这个new属于语言内建的">
   
     <link rel="alternate" href="/atom.xml" title="mengshuai的博客" type="application/atom+xml">
   
@@ -67,9 +68,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-More Effective C++ 学习笔记" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-More Effective C++ 学习笔记" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/09/02/More Effective C++ 学习笔记/" class="article-date">
   <time datetime="2017-09-02T01:43:16.000Z" itemprop="datePublished">2017-09-02</time>
@@ -82,8 +81,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/02/More Effective C++ 学习笔记/">More Effective C++ 学习笔记</a>
+    <h1 class="article-title" itemprop="name">
+      More Effective C++ 学习笔记
     </h1>
   
 
@@ -114,92 +113,19 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-hello" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/07/20/hello/" class="article-date">
-  <time datetime="2017-07-20T08:08:52.000Z" itemprop="datePublished">2017-07-20</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/20/hello/">欢迎访问</a>
-    </h1>
+    <a href="/2017/07/20/hello/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">欢迎访问</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>欢迎来到我的博客，这里分享技术文章。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cppdever.github.io/2017/07/20/hello/" data-id="cj72na3zl00035gusnqhowlqo" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
   
 </article>
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/07/20/hello-world/" class="article-date">
-  <time datetime="2017-07-20T07:58:28.662Z" itemprop="datePublished">2017-07-20</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/20/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cppdever.github.io/2017/07/20/hello-world/" data-id="cj72na3z800015gusv2k8y3e6" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 </section>
         
