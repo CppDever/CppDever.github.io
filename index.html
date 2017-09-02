@@ -113,7 +113,67 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cppdever.github.io/2017/09/02/Boost学习/" data-id="cj72ozkhi00013gusjpehcvfx" class="article-share-link">Share</a>
+      <a data-url="https://cppdever.github.io/2017/09/02/Boost学习/" data-id="cj731o9zb0001twusxc6b3kra" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-深入理解LINUX内核" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/02/深入理解LINUX内核/" class="article-date">
+  <time datetime="2017-09-02T02:29:16.000Z" itemprop="datePublished">2017-09-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/02/深入理解LINUX内核/">深入理解LINUX内核学习笔记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="可重入内核"><a href="#可重入内核" class="headerlink" title="可重入内核"></a>可重入内核</h3><p>所有函数可重入或者使用锁机制来控制不可重入的函数</p>
+<h3 id="进程地址空间"><a href="#进程地址空间" class="headerlink" title="进程地址空间"></a>进程地址空间</h3><p>每个进程运行在自己的私有地址空间（逻辑地址）</p>
+<p>用户态下运行的进程涉及到<strong>私有栈</strong>、<strong>数据区</strong>和<strong>代码区</strong>。当进程在内核态运行时，进程访问内核的<strong>代码区</strong>和<strong>数据区</strong>，使用另外的<strong>私有栈</strong>（使每个进程陷入内核而可重入）。</p>
+<p>共享代码区（运行多个相同程序）  </p>
+<p>共享内存技术 system V</p>
+<p>mmap函数</p>
+<h3 id="同步和临界区"><a href="#同步和临界区" class="headerlink" title="同步和临界区"></a>同步和临界区</h3><p>对全局变量的安全访问通过原子操作来保证。</p>
+<p>信号量：一个计数器、两个减少/增加的原子操作、一个等待进程的链表</p>
+<p>自旋锁：死循环等待锁被打开，在单处理机器上无效。</p>
+<h3 id="内存寻址"><a href="#内存寻址" class="headerlink" title="内存寻址"></a>内存寻址</h3><p>在80x86下有三种地址：</p>
+<ul>
+<li>逻辑地址：即段地址（段选择符：段偏移）</li>
+<li>线性地址（虚拟地址）：4GB空间</li>
+<li>物理地址：真实芯片级地址</li>
+</ul>
+<p>逻辑地址-&gt;线性地址 通过分段单元<br>线性地址-&gt;物理地址 通过分页单元</p>
+<p>实模式：做兼容目的，1M空间<br>保护模式：</p>
+<p>CS寄存器即代码段寄存器，含有一个两位的字段，以指明CPU当前的特权级，Linux使用0级和3级，分别为内核态和用户态。</p>
+<p>段选择符 存储在段寄存器中，加上偏移即可生成线性地址<br>段描述符：</p>
+<ul>
+<li>代码段描述符</li>
+<li>数据段描述符</li>
+<li>任务状态段描述符：保存进程上下文</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://cppdever.github.io/2017/09/02/深入理解LINUX内核/" data-id="cj731o9z70000twusfbyx8rxo" class="article-share-link">Share</a>
       
       
     </footer>
@@ -195,7 +255,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cppdever.github.io/2017/09/02/设计模式/" data-id="cj72ozkhp00043gusa8txvn9r" class="article-share-link">Share</a>
+      <a data-url="https://cppdever.github.io/2017/09/02/设计模式/" data-id="cj731o9zp0005twus9cb4gimm" class="article-share-link">Share</a>
       
       
     </footer>
@@ -244,7 +304,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cppdever.github.io/2017/09/02/More Effective C++ 学习笔记/" data-id="cj72ozkhl00023gusoaf2xoti" class="article-share-link">Share</a>
+      <a data-url="https://cppdever.github.io/2017/09/02/More Effective C++ 学习笔记/" data-id="cj731o9zd0002twusa55y6cz6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -281,7 +341,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cppdever.github.io/2017/07/20/hello/" data-id="cj72ozkhf00003gusa2wc03nm" class="article-share-link">Share</a>
+      <a data-url="https://cppdever.github.io/2017/07/20/hello/" data-id="cj731o9ze0003twusimyvvio2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -326,7 +386,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cppdever.github.io/2017/07/20/hello-world/" data-id="cj72ozkhn00033gusl1jgiqbs" class="article-share-link">Share</a>
+      <a data-url="https://cppdever.github.io/2017/07/20/hello-world/" data-id="cj731o9zf0004twuskpvqnw4w" class="article-share-link">Share</a>
       
       
     </footer>
@@ -370,6 +430,10 @@
           </li>
         
           <li>
+            <a href="/2017/09/02/深入理解LINUX内核/">深入理解LINUX内核学习笔记</a>
+          </li>
+        
+          <li>
             <a href="/2017/09/02/设计模式/">设计模式</a>
           </li>
         
@@ -379,10 +443,6 @@
         
           <li>
             <a href="/2017/07/20/hello/">欢迎访问</a>
-          </li>
-        
-          <li>
-            <a href="/2017/07/20/hello-world/">Hello World</a>
           </li>
         
       </ul>

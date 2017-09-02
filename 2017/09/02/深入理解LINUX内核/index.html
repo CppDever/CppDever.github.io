@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>深入理解LINUX内核学习笔记 | mengshuai的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="可重入内核所有函数可重入或者使用锁机制来控制不可重入的函数 进程地址空间每个进程运行在自己的私有地址空间（逻辑地址） 用户态下运行的进程涉及到私有栈、数据区和代码区。当进程在内核态运行时，进程访问内核的代码区和数据区，使用另外的私有栈（使每个进程陷入内核而可重入）。 共享代码区（运行多个相同程序）   共享内存技术 system V mmap函数 同步和临界区对全局变量的安全访问通过原子操作来保证">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入理解LINUX内核学习笔记">
+<meta property="og:url" content="https://cppdever.github.io/2017/09/02/深入理解LINUX内核/index.html">
+<meta property="og:site_name" content="mengshuai的博客">
+<meta property="og:description" content="可重入内核所有函数可重入或者使用锁机制来控制不可重入的函数 进程地址空间每个进程运行在自己的私有地址空间（逻辑地址） 用户态下运行的进程涉及到私有栈、数据区和代码区。当进程在内核态运行时，进程访问内核的代码区和数据区，使用另外的私有栈（使每个进程陷入内核而可重入）。 共享代码区（运行多个相同程序）   共享内存技术 system V mmap函数 同步和临界区对全局变量的安全访问通过原子操作来保证">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-09-02T08:26:09.409Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="深入理解LINUX内核学习笔记">
+<meta name="twitter:description" content="可重入内核所有函数可重入或者使用锁机制来控制不可重入的函数 进程地址空间每个进程运行在自己的私有地址空间（逻辑地址） 用户态下运行的进程涉及到私有栈、数据区和代码区。当进程在内核态运行时，进程访问内核的代码区和数据区，使用另外的私有栈（使每个进程陷入内核而可重入）。 共享代码区（运行多个相同程序）   共享内存技术 system V mmap函数 同步和临界区对全局变量的安全访问通过原子操作来保证">
+  
+    <link rel="alternate" href="/atom.xml" title="mengshuai的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">mengshuai的博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">CPP Developer</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://cppdever.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-深入理解LINUX内核" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/02/深入理解LINUX内核/" class="article-date">
+  <time datetime="2017-09-02T02:29:16.000Z" itemprop="datePublished">2017-09-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      深入理解LINUX内核学习笔记
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="可重入内核"><a href="#可重入内核" class="headerlink" title="可重入内核"></a>可重入内核</h3><p>所有函数可重入或者使用锁机制来控制不可重入的函数</p>
+<h3 id="进程地址空间"><a href="#进程地址空间" class="headerlink" title="进程地址空间"></a>进程地址空间</h3><p>每个进程运行在自己的私有地址空间（逻辑地址）</p>
+<p>用户态下运行的进程涉及到<strong>私有栈</strong>、<strong>数据区</strong>和<strong>代码区</strong>。当进程在内核态运行时，进程访问内核的<strong>代码区</strong>和<strong>数据区</strong>，使用另外的<strong>私有栈</strong>（使每个进程陷入内核而可重入）。</p>
+<p>共享代码区（运行多个相同程序）  </p>
+<p>共享内存技术 system V</p>
+<p>mmap函数</p>
+<h3 id="同步和临界区"><a href="#同步和临界区" class="headerlink" title="同步和临界区"></a>同步和临界区</h3><p>对全局变量的安全访问通过原子操作来保证。</p>
+<p>信号量：一个计数器、两个减少/增加的原子操作、一个等待进程的链表</p>
+<p>自旋锁：死循环等待锁被打开，在单处理机器上无效。</p>
+<h3 id="内存寻址"><a href="#内存寻址" class="headerlink" title="内存寻址"></a>内存寻址</h3><p>在80x86下有三种地址：</p>
+<ul>
+<li>逻辑地址：即段地址（段选择符：段偏移）</li>
+<li>线性地址（虚拟地址）：4GB空间</li>
+<li>物理地址：真实芯片级地址</li>
+</ul>
+<p>逻辑地址-&gt;线性地址 通过分段单元<br>线性地址-&gt;物理地址 通过分页单元</p>
+<p>实模式：做兼容目的，1M空间<br>保护模式：</p>
+<p>CS寄存器即代码段寄存器，含有一个两位的字段，以指明CPU当前的特权级，Linux使用0级和3级，分别为内核态和用户态。</p>
+<p>段选择符 存储在段寄存器中，加上偏移即可生成线性地址<br>段描述符：</p>
+<ul>
+<li>代码段描述符</li>
+<li>数据段描述符</li>
+<li>任务状态段描述符：保存进程上下文</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://cppdever.github.io/2017/09/02/深入理解LINUX内核/" data-id="cj731o9z70000twusfbyx8rxo" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/09/02/Boost学习/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Boost学习
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/09/02/设计模式/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">设计模式</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/09/02/Boost学习/">Boost学习</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/02/深入理解LINUX内核/">深入理解LINUX内核学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/02/设计模式/">设计模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/02/More Effective C++ 学习笔记/">More Effective C++ 学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/20/hello/">欢迎访问</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 mengshuai<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
