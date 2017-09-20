@@ -69,6 +69,51 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-QT坑" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/20/QT坑/" class="article-date">
+  <time datetime="2017-09-20T07:26:00.000Z" itemprop="datePublished">2017-09-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/20/QT坑/">QT坑</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="QT坑之桌面可用区域分辨率"><a href="#QT坑之桌面可用区域分辨率" class="headerlink" title="QT坑之桌面可用区域分辨率"></a>QT坑之桌面可用区域分辨率</h1><p>在做UI时经常会通过分辨率来决定窗口的位置，如一些左上角右上角程序、广告等等。这就需要获取windows桌面上除任务栏以外区域的分辨率，在使用QT获取该分辨率时，遇到了一个坑。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">//获取桌面可用长度分辨率</div><div class="line">QDesktopWidget * desktopWidget = QApplication::desktop();</div><div class="line">QRect screenRect = desktopWidget-&gt;availableGeometry();</div><div class="line">int screenWidth = screenRect.width();</div><div class="line">int screenHeight = screenRect.height();</div></pre></td></tr></table></figure>
+<p>通过上述代码获取除任务栏以外的区域分辨率，但是坑的是，我的目的是切换分辨率时触发函数来获取分辨率，而通过上述语句获取时，得到的是切换分辨率之前的分辨率，导致我的功能没有实现。 </p>
+<p>原因可能是需要等一会才能获取到最新的分辨率或者最新的分辨率还没有写到注册表之类的，总之，这是一个坑，如果分辨率变化时触发某些任务就不要用它而是使用windowsAPI来解决。</p>
+<p>代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">MONITORINFO monitor = &#123;&#125;;</div><div class="line">    monitor.cbSize = sizeof(monitor);</div><div class="line">    ::GetMonitorInfo(::MonitorFromWindow(NULL, MONITOR_DEFAULTTOPRIMARY), &amp;monitor);</div><div class="line"></div><div class="line">    RECT screenRect = monitor.rcWork;  //获得主显示器的可用区域</div><div class="line"></div><div class="line">    int screenWidth = screenRect.right - screenRect.left;</div><div class="line">    int screenHeight = screenRect.bottom - screenRect.top;</div></pre></td></tr></table></figure>
+<h1 id="QT坑之PaintEvent"><a href="#QT坑之PaintEvent" class="headerlink" title="QT坑之PaintEvent"></a>QT坑之PaintEvent</h1><p>做UI时一般会继承QT的QWidget重写这些事件函数来实现一些诸如鼠标事件、绘图事件等功能。</p>
+<p>PaintEvent就是QT的绘图事件函数，当窗口调用update函数或者收到一个QEvent::Paint事件时就会触发PaintEvent函数，而坑的一点就是如果你的窗口是没有边框的，那么QT就取消窗口事件处理，导致即使重写了函数也不一定被触发。我试验时在单步调试下没有问题，但是直接运行就好像阻塞了一样（日志没有输出出来），具体原因不明。</p>
+<p>这时对于UI方面可以使用重写nativeEvent来对windows消息进行直接处理，从而跳过事件处理直接底层接口实现，避免他的不稳定。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">bool widget::nativeEvent(const QByteArray &amp; eventType, void * message, long * result)</div><div class="line">&#123;</div><div class="line">    MSG* msg = (MSG*)message;</div><div class="line">    switch (msg-&gt;message)</div><div class="line">    &#123;</div><div class="line">    case WM_DISPLAYCHANGE:</div><div class="line">        // 分辨率改变时 做一些工作</div><div class="line">        break;</div><div class="line">    default:</div><div class="line">        break;</div><div class="line">    &#125;</div><div class="line">    return false;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://cppdever.github.io/2017/09/20/QT坑/" data-id="cj7spgora0000ocusmdtidru3" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Boost学习" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/09/02/Boost学习/" class="article-date">
@@ -113,67 +158,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cppdever.github.io/2017/09/02/Boost学习/" data-id="cj731o9zb0001twusxc6b3kra" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-深入理解LINUX内核" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/09/02/深入理解LINUX内核/" class="article-date">
-  <time datetime="2017-09-02T02:29:16.000Z" itemprop="datePublished">2017-09-02</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/02/深入理解LINUX内核/">深入理解LINUX内核学习笔记</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="可重入内核"><a href="#可重入内核" class="headerlink" title="可重入内核"></a>可重入内核</h3><p>所有函数可重入或者使用锁机制来控制不可重入的函数</p>
-<h3 id="进程地址空间"><a href="#进程地址空间" class="headerlink" title="进程地址空间"></a>进程地址空间</h3><p>每个进程运行在自己的私有地址空间（逻辑地址）</p>
-<p>用户态下运行的进程涉及到<strong>私有栈</strong>、<strong>数据区</strong>和<strong>代码区</strong>。当进程在内核态运行时，进程访问内核的<strong>代码区</strong>和<strong>数据区</strong>，使用另外的<strong>私有栈</strong>（使每个进程陷入内核而可重入）。</p>
-<p>共享代码区（运行多个相同程序）  </p>
-<p>共享内存技术 system V</p>
-<p>mmap函数</p>
-<h3 id="同步和临界区"><a href="#同步和临界区" class="headerlink" title="同步和临界区"></a>同步和临界区</h3><p>对全局变量的安全访问通过原子操作来保证。</p>
-<p>信号量：一个计数器、两个减少/增加的原子操作、一个等待进程的链表</p>
-<p>自旋锁：死循环等待锁被打开，在单处理机器上无效。</p>
-<h3 id="内存寻址"><a href="#内存寻址" class="headerlink" title="内存寻址"></a>内存寻址</h3><p>在80x86下有三种地址：</p>
-<ul>
-<li>逻辑地址：即段地址（段选择符：段偏移）</li>
-<li>线性地址（虚拟地址）：4GB空间</li>
-<li>物理地址：真实芯片级地址</li>
-</ul>
-<p>逻辑地址-&gt;线性地址 通过分段单元<br>线性地址-&gt;物理地址 通过分页单元</p>
-<p>实模式：做兼容目的，1M空间<br>保护模式：</p>
-<p>CS寄存器即代码段寄存器，含有一个两位的字段，以指明CPU当前的特权级，Linux使用0级和3级，分别为内核态和用户态。</p>
-<p>段选择符 存储在段寄存器中，加上偏移即可生成线性地址<br>段描述符：</p>
-<ul>
-<li>代码段描述符</li>
-<li>数据段描述符</li>
-<li>任务状态段描述符：保存进程上下文</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://cppdever.github.io/2017/09/02/深入理解LINUX内核/" data-id="cj731o9z70000twusfbyx8rxo" class="article-share-link">Share</a>
+      <a data-url="https://cppdever.github.io/2017/09/02/Boost学习/" data-id="cj7spgort0004ocus3931dflq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -255,7 +240,67 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cppdever.github.io/2017/09/02/设计模式/" data-id="cj731o9zp0005twus9cb4gimm" class="article-share-link">Share</a>
+      <a data-url="https://cppdever.github.io/2017/09/02/设计模式/" data-id="cj7spgorq0002ocusecaz23fx" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-深入理解LINUX内核" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/02/深入理解LINUX内核/" class="article-date">
+  <time datetime="2017-09-02T02:29:16.000Z" itemprop="datePublished">2017-09-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/02/深入理解LINUX内核/">深入理解LINUX内核学习笔记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="可重入内核"><a href="#可重入内核" class="headerlink" title="可重入内核"></a>可重入内核</h3><p>所有函数可重入或者使用锁机制来控制不可重入的函数</p>
+<h3 id="进程地址空间"><a href="#进程地址空间" class="headerlink" title="进程地址空间"></a>进程地址空间</h3><p>每个进程运行在自己的私有地址空间（逻辑地址）</p>
+<p>用户态下运行的进程涉及到<strong>私有栈</strong>、<strong>数据区</strong>和<strong>代码区</strong>。当进程在内核态运行时，进程访问内核的<strong>代码区</strong>和<strong>数据区</strong>，使用另外的<strong>私有栈</strong>（使每个进程陷入内核而可重入）。</p>
+<p>共享代码区（运行多个相同程序）  </p>
+<p>共享内存技术 system V</p>
+<p>mmap函数</p>
+<h3 id="同步和临界区"><a href="#同步和临界区" class="headerlink" title="同步和临界区"></a>同步和临界区</h3><p>对全局变量的安全访问通过原子操作来保证。</p>
+<p>信号量：一个计数器、两个减少/增加的原子操作、一个等待进程的链表</p>
+<p>自旋锁：死循环等待锁被打开，在单处理机器上无效。</p>
+<h3 id="内存寻址"><a href="#内存寻址" class="headerlink" title="内存寻址"></a>内存寻址</h3><p>在80x86下有三种地址：</p>
+<ul>
+<li>逻辑地址：即段地址（段选择符：段偏移）</li>
+<li>线性地址（虚拟地址）：4GB空间</li>
+<li>物理地址：真实芯片级地址</li>
+</ul>
+<p>逻辑地址-&gt;线性地址 通过分段单元<br>线性地址-&gt;物理地址 通过分页单元</p>
+<p>实模式：做兼容目的，1M空间<br>保护模式：</p>
+<p>CS寄存器即代码段寄存器，含有一个两位的字段，以指明CPU当前的特权级，Linux使用0级和3级，分别为内核态和用户态。</p>
+<p>段选择符 存储在段寄存器中，加上偏移即可生成线性地址<br>段描述符：</p>
+<ul>
+<li>代码段描述符</li>
+<li>数据段描述符</li>
+<li>任务状态段描述符：保存进程上下文</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://cppdever.github.io/2017/09/02/深入理解LINUX内核/" data-id="cj7spgosk0006ocusuak3etqj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -304,7 +349,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cppdever.github.io/2017/09/02/More Effective C++ 学习笔记/" data-id="cj731o9zd0002twusa55y6cz6" class="article-share-link">Share</a>
+      <a data-url="https://cppdever.github.io/2017/09/02/More Effective C++ 学习笔记/" data-id="cj7spgors0003ocusb31rrl1z" class="article-share-link">Share</a>
       
       
     </footer>
@@ -341,7 +386,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cppdever.github.io/2017/07/20/hello/" data-id="cj731o9ze0003twusimyvvio2" class="article-share-link">Share</a>
+      <a data-url="https://cppdever.github.io/2017/07/20/hello/" data-id="cj7spgoro0001ocus86s3vhsn" class="article-share-link">Share</a>
       
       
     </footer>
@@ -386,7 +431,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cppdever.github.io/2017/07/20/hello-world/" data-id="cj731o9zf0004twuskpvqnw4w" class="article-share-link">Share</a>
+      <a data-url="https://cppdever.github.io/2017/07/20/hello-world/" data-id="cj7spgosi0005ocus795q9x1h" class="article-share-link">Share</a>
       
       
     </footer>
@@ -426,11 +471,11 @@
       <ul>
         
           <li>
-            <a href="/2017/09/02/Boost学习/">Boost学习</a>
+            <a href="/2017/09/20/QT坑/">QT坑</a>
           </li>
         
           <li>
-            <a href="/2017/09/02/深入理解LINUX内核/">深入理解LINUX内核学习笔记</a>
+            <a href="/2017/09/02/Boost学习/">Boost学习</a>
           </li>
         
           <li>
@@ -438,11 +483,11 @@
           </li>
         
           <li>
-            <a href="/2017/09/02/More Effective C++ 学习笔记/">More Effective C++ 学习笔记</a>
+            <a href="/2017/09/02/深入理解LINUX内核/">深入理解LINUX内核学习笔记</a>
           </li>
         
           <li>
-            <a href="/2017/07/20/hello/">欢迎访问</a>
+            <a href="/2017/09/02/More Effective C++ 学习笔记/">More Effective C++ 学习笔记</a>
           </li>
         
       </ul>

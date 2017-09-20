@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>QT坑 | mengshuai的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="QT坑之桌面可用区域分辨率在做UI时经常会通过分辨率来决定窗口的位置，如一些左上角右上角程序、广告等等。这就需要获取windows桌面上除任务栏以外区域的分辨率，在使用QT获取该分辨率时，遇到了一个坑。 12345//获取桌面可用长度分辨率QDesktopWidget * desktopWidget = QApplication::desktop();QRect screenRect = desk">
+<meta property="og:type" content="article">
+<meta property="og:title" content="QT坑">
+<meta property="og:url" content="https://cppdever.github.io/2017/09/20/QT坑/index.html">
+<meta property="og:site_name" content="mengshuai的博客">
+<meta property="og:description" content="QT坑之桌面可用区域分辨率在做UI时经常会通过分辨率来决定窗口的位置，如一些左上角右上角程序、广告等等。这就需要获取windows桌面上除任务栏以外区域的分辨率，在使用QT获取该分辨率时，遇到了一个坑。 12345//获取桌面可用长度分辨率QDesktopWidget * desktopWidget = QApplication::desktop();QRect screenRect = desk">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-09-20T07:26:29.430Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="QT坑">
+<meta name="twitter:description" content="QT坑之桌面可用区域分辨率在做UI时经常会通过分辨率来决定窗口的位置，如一些左上角右上角程序、广告等等。这就需要获取windows桌面上除任务栏以外区域的分辨率，在使用QT获取该分辨率时，遇到了一个坑。 12345//获取桌面可用长度分辨率QDesktopWidget * desktopWidget = QApplication::desktop();QRect screenRect = desk">
+  
+    <link rel="alternate" href="/atom.xml" title="mengshuai的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">mengshuai的博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">CPP Developer</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://cppdever.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-QT坑" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/20/QT坑/" class="article-date">
+  <time datetime="2017-09-20T07:26:00.000Z" itemprop="datePublished">2017-09-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      QT坑
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="QT坑之桌面可用区域分辨率"><a href="#QT坑之桌面可用区域分辨率" class="headerlink" title="QT坑之桌面可用区域分辨率"></a>QT坑之桌面可用区域分辨率</h1><p>在做UI时经常会通过分辨率来决定窗口的位置，如一些左上角右上角程序、广告等等。这就需要获取windows桌面上除任务栏以外区域的分辨率，在使用QT获取该分辨率时，遇到了一个坑。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">//获取桌面可用长度分辨率</div><div class="line">QDesktopWidget * desktopWidget = QApplication::desktop();</div><div class="line">QRect screenRect = desktopWidget-&gt;availableGeometry();</div><div class="line">int screenWidth = screenRect.width();</div><div class="line">int screenHeight = screenRect.height();</div></pre></td></tr></table></figure>
+<p>通过上述代码获取除任务栏以外的区域分辨率，但是坑的是，我的目的是切换分辨率时触发函数来获取分辨率，而通过上述语句获取时，得到的是切换分辨率之前的分辨率，导致我的功能没有实现。 </p>
+<p>原因可能是需要等一会才能获取到最新的分辨率或者最新的分辨率还没有写到注册表之类的，总之，这是一个坑，如果分辨率变化时触发某些任务就不要用它而是使用windowsAPI来解决。</p>
+<p>代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">MONITORINFO monitor = &#123;&#125;;</div><div class="line">    monitor.cbSize = sizeof(monitor);</div><div class="line">    ::GetMonitorInfo(::MonitorFromWindow(NULL, MONITOR_DEFAULTTOPRIMARY), &amp;monitor);</div><div class="line"></div><div class="line">    RECT screenRect = monitor.rcWork;  //获得主显示器的可用区域</div><div class="line"></div><div class="line">    int screenWidth = screenRect.right - screenRect.left;</div><div class="line">    int screenHeight = screenRect.bottom - screenRect.top;</div></pre></td></tr></table></figure>
+<h1 id="QT坑之PaintEvent"><a href="#QT坑之PaintEvent" class="headerlink" title="QT坑之PaintEvent"></a>QT坑之PaintEvent</h1><p>做UI时一般会继承QT的QWidget重写这些事件函数来实现一些诸如鼠标事件、绘图事件等功能。</p>
+<p>PaintEvent就是QT的绘图事件函数，当窗口调用update函数或者收到一个QEvent::Paint事件时就会触发PaintEvent函数，而坑的一点就是如果你的窗口是没有边框的，那么QT就取消窗口事件处理，导致即使重写了函数也不一定被触发。我试验时在单步调试下没有问题，但是直接运行就好像阻塞了一样（日志没有输出出来），具体原因不明。</p>
+<p>这时对于UI方面可以使用重写nativeEvent来对windows消息进行直接处理，从而跳过事件处理直接底层接口实现，避免他的不稳定。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">bool widget::nativeEvent(const QByteArray &amp; eventType, void * message, long * result)</div><div class="line">&#123;</div><div class="line">    MSG* msg = (MSG*)message;</div><div class="line">    switch (msg-&gt;message)</div><div class="line">    &#123;</div><div class="line">    case WM_DISPLAYCHANGE:</div><div class="line">        // 分辨率改变时 做一些工作</div><div class="line">        break;</div><div class="line">    default:</div><div class="line">        break;</div><div class="line">    &#125;</div><div class="line">    return false;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://cppdever.github.io/2017/09/20/QT坑/" data-id="cj7spgora0000ocusmdtidru3" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/09/02/Boost学习/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Boost学习</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/09/20/QT坑/">QT坑</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/02/Boost学习/">Boost学习</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/02/设计模式/">设计模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/02/深入理解LINUX内核/">深入理解LINUX内核学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/02/More Effective C++ 学习笔记/">More Effective C++ 学习笔记</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 mengshuai<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
